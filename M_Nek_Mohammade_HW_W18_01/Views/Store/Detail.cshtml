@@ -1,0 +1,53 @@
+﻿@using M_Nek_Mohammade_HW_W18_01.DataAccessLayer
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<button id="sortAsc" class="btn btn-success">Sort by Price Ascending</button>
+<button id="sortDesc" class="btn btn-danger">Sort by Price Descending</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Model Year</th>
+            <th>List Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="productList">
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.ModelYear</td>
+                <td>@product.ListPrice</td>
+                <td><a href="@Url.Action("EditProduct", new { ProductId = product.PruductId })" class="btn btn-warning">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#sortAsc').click(function () {
+                sortProducts(true);
+            });
+
+            $('#sortDesc').click(function () {
+                sortProducts(false);
+            });
+
+            function sortProducts(asc) {
+                $.post('@Url.Action("SortProducts")', { storeId: @ViewBag.StoreId, sortByPriceAsc: asc }, function (data) {
+                    $('#productList').html(data);
+                });
+            }
+        });
+    </script>
+}

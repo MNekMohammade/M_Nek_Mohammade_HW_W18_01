@@ -1,0 +1,33 @@
+﻿@using M_Nek_Mohammade_HW_W18_01.DataAccessLayer
+@model Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="EditProduct" method="post">
+    <input asp-for="PruductId" type="hidden" />
+    <div class="form-group">
+        <label asp-for="ProductName"></label>
+        <input asp-for="ProductName" class="form-control" required />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModelYear"></label>
+        <input asp-for="ModelYear" class="form-control" type="number" required />
+        <span asp-validation-for="ModelYear" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ListPrice"></label>
+        <input asp-for="ListPrice" class="form-control" type="number" step="0.01" required />
+        <span asp-validation-for="ListPrice" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

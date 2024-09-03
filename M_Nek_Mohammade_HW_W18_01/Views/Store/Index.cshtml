@@ -1,0 +1,43 @@
+﻿@using M_Nek_Mohammade_HW_W18_01.DataAccessLayer
+@model IEnumerable<Store>
+@{
+    ViewBag.Title = "Stores";
+}
+
+<h2>Stores</h2>
+
+<form method="get">
+    <input type="text" name="nameFilter" placeholder="Name Filter" value="@Context.Request.Query["nameFilter"]" />
+    <input type="text" name="zipCodeFilter" placeholder="Zip Code Filter" value="@Context.Request.Query["zipCodeFilter"]" />
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var store in Model)
+        {
+            <tr>
+                <td>@store.StoreName</td>
+                <td>@store.Phone</td>
+                <td>@store.Email</td>
+                <td>@store.Street</td>
+                <td>@store.City</td>
+                <td>@store.State</td>
+                <td>@store.ZipCode</td>
+                <td><a href="@Url.Action("Details", new { id = store.StoreId })" class="btn btn-info">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
