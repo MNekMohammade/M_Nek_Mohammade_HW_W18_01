@@ -2,7 +2,7 @@
 using M_Nek_Mohammade_HW_W18_01.ServiceLayer;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//محمد موفق شدی خدایا هدایتت کرد خدایا سپاس
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<StoreService>();
 // Add services to the container.
