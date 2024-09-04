@@ -10,6 +10,6 @@ namespace M_Nek_Mohammade_HW_W18_01.DataAccessLayer
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string ZipCode { get; set; }
+        public string Zip_Code { get; set; }
     }
 }

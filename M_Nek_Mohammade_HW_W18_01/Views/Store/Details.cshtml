@@ -13,9 +13,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Product Name</th>
-            <th>Model Year</th>
-            <th>List Price</th>
+            <th>Product_Name</th>
+            <th>Model_Year</th>
+            <th>List_Price</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@
                 <td>@product.ProductName</td>
                 <td>@product.ModelYear</td>
                 <td>@product.ListPrice</td>
-                <td><a href="@Url.Action("EditProduct", new { ProductId = product.PruductId })" class="btn btn-warning">Edit</a></td>
+                <td><a href="@Url.Action("EditProduct", new { Product_Id = product.Product_Id })" class="btn btn-warning">Edit</a></td>
             </tr>
         }
     </tbody>

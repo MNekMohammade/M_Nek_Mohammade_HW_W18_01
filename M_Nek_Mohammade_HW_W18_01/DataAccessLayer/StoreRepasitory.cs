@@ -28,14 +28,28 @@ namespace M_Nek_Mohammade_HW_W18_01.DataAccessLayer
         }
 
         // StoreRepository.cs
-        public async Task<IEnumerable<Product>> GetProductsByStoreIdAsync(int storeId, bool sortByPriceAsc)
+        /*public async Task<IEnumerable<Product>> GetProductsByStoreIdAsync(int storeId, bool sortByPriceAsc)
         {
             using (var db = Connection)
             {
                 var query = $"SELECT * FROM production.products WHERE StoreId = @StoreId ORDER BY ListPrice {(sortByPriceAsc ? "ASC" : "DESC")}";
                 return await db.QueryAsync<Product>(query, new { StoreId = storeId });
             }
-        }
+        }*/
+        public async Task<IEnumerable<Product>> GetProductsByStoreIdAsync(int storeId, bool sortByPriceAsc)
+{
+    using (var db = Connection)
+    {
+        var query = @"
+            SELECT p.*
+            FROM production.products p
+            INNER JOIN production.stocks s ON p.product_id = s.product_id
+            WHERE s.store_id = @StoreId
+            ORDER BY p.list_price " + (sortByPriceAsc ? "ASC" : "DESC");
+
+        return await db.QueryAsync<Product>(query, new { StoreId = storeId });
+    }
+}
 
 
         public async Task<Product> GetProductByIdAsync(int productId)
