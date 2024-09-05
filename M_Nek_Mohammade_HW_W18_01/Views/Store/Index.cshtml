@@ -29,14 +29,14 @@
         @foreach (var store in Model)
         {
             <tr>
-                <td>@store.StoreName</td>
+                <td>@store.Store_Name</td>
                 <td>@store.Phone</td>
                 <td>@store.Email</td>
                 <td>@store.Street</td>
                 <td>@store.City</td>
                 <td>@store.State</td>
                 <td>@store.Zip_Code</td>
-                <td><a href="@Url.Action("Details", new { id = store.StoreId })" class="btn btn-info">Details</a></td>
+                <td><a href="@Url.Action("Details", new { id = store.Store_Id })" class="btn btn-info">Details</a></td>
             </tr>
         }
     </tbody>

@@ -7,8 +7,8 @@
 
 <h2>Products</h2>
 
-<button id="sortAsc" class="btn btn-success">Sort by Price Ascending</button>
-<button id="sortDesc" class="btn btn-danger">Sort by Price Descending</button>
+<a asp-action="SortProducts" asp-route-storeId="@ViewBag.StoreId" asp-route-sortByPriceAsc="true" class="btn btn-success">Sort by Price Ascending</a>
+<a asp-action="SortProducts" asp-route-storeId="@ViewBag.StoreId" asp-route-sortByPriceAsc="false" class="btn btn-danger">Sort by Price Descending</a>
 
 <table class="table">
     <thead>
@@ -23,31 +23,13 @@
         @foreach (var product in Model)
         {
             <tr>
-                <td>@product.ProductName</td>
-                <td>@product.ModelYear</td>
-                <td>@product.ListPrice</td>
-                <td><a href="@Url.Action("EditProduct", new { Product_Id = product.Product_Id })" class="btn btn-warning">Edit</a></td>
+                <td>@product.Product_Name</td>
+                <td>@product.Model_Year</td>
+                <td>@product.List_Price</td>
+                <td><a href="@Url.Action("EditProduct", new { productId = product.Product_Id })" class="btn btn-warning">Edit</a></td>
             </tr>
         }
     </tbody>
 </table>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#sortAsc').click(function () {
-                sortProducts(true);
-            });
 
-            $('#sortDesc').click(function () {
-                sortProducts(false);
-            });
-
-            function sortProducts(asc) {
-                $.post('@Url.Action("SortProducts")', { storeId: @ViewBag.StoreId, sortByPriceAsc: asc }, function (data) {
-                    $('#productList').html(data);
-                });
-            }
-        });
-    </script>
-}

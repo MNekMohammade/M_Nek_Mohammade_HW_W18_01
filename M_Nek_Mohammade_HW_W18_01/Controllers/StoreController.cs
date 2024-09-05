@@ -31,11 +31,12 @@ namespace M_Nek_Mohammade_HW_W18_01.Controllers
             return View(products);
         }
 
-        [HttpPost]
+       //تغییر details
         public async Task<IActionResult> SortProducts(int storeId, bool sortByPriceAsc)
         {
-            var products = await _storeService.GetProductsByStoreIdAsync(storeId, sortByPriceAsc);
-            return PartialView("_ProductListPartial", products);
+            var products = (await _storeService.GetProductsByStoreIdAsync(storeId, sortByPriceAsc));
+            ViewBag.StoreId = storeId;
+            return View ("Details", products);
         }
 
         public async Task<IActionResult> EditProduct(int productId)
@@ -43,14 +44,15 @@ namespace M_Nek_Mohammade_HW_W18_01.Controllers
             var product = await _storeService.GetProductByIdAsync(productId);
             return View(product);
         }
-
+        //details 
+        //product.store.Id
         [HttpPost]
         public async Task<IActionResult> EditProduct(Product product)
         {
             if (ModelState.IsValid)
             {
                 await _storeService.UpdateProductAsync(product);
-                return RedirectToAction("Details", new { id = product.StoreId });
+                return RedirectToAction("Details", new { id = product.Store_Id });
             }
             return View(product);
         }

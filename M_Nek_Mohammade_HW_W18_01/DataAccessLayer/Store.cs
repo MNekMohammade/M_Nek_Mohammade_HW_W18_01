@@ -3,8 +3,8 @@ namespace M_Nek_Mohammade_HW_W18_01.DataAccessLayer
 {
     public class Store
     {
-        public int StoreId { get; set; }
-        public string StoreName { get; set; }
+        public int Store_Id { get; set; }
+        public string Store_Name { get; set; }
         public string Phone {  get; set; }
         public string Email { get; set; }
         public string Street { get; set; }

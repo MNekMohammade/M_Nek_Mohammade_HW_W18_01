@@ -32,31 +32,32 @@ namespace M_Nek_Mohammade_HW_W18_01.DataAccessLayer
         {
             using (var db = Connection)
             {
-                var query = $"SELECT * FROM production.products WHERE StoreId = @StoreId ORDER BY ListPrice {(sortByPriceAsc ? "ASC" : "DESC")}";
-                return await db.QueryAsync<Product>(query, new { StoreId = storeId });
+                var query = $"SELECT * FROM production.products WHERE Store_Id = @Store_Id ORDER BY List_Price {(sortByPriceAsc ? "ASC" : "DESC")}";
+                return await db.QueryAsync<Product>(query, new { Store_Id = storeId });
             }
         }*/
         public async Task<IEnumerable<Product>> GetProductsByStoreIdAsync(int storeId, bool sortByPriceAsc)
 {
-    using (var db = Connection)
-    {
-        var query = @"
-            SELECT p.*
-            FROM production.products p
-            INNER JOIN production.stocks s ON p.product_id = s.product_id
-            WHERE s.store_id = @StoreId
-            ORDER BY p.list_price " + (sortByPriceAsc ? "ASC" : "DESC");
-
-        return await db.QueryAsync<Product>(query, new { StoreId = storeId });
-    }
-}
+                using (var db = Connection)
+                {
+                    var query = @"
+                        SELECT p.*
+                        FROM production.products p
+                        INNER JOIN production.stocks s ON p.product_id = s.product_id
+                        WHERE s.store_id = @Store_Id
+                        ORDER BY p.list_price " + (sortByPriceAsc ? "ASC" : "DESC");
+                //edit Store_Id
+                    return await db.QueryAsync<Product>(query, new { Store_Id = storeId });
+                }
+            }
 
 
         public async Task<Product> GetProductByIdAsync(int productId)
         {
             using (var db = Connection)
             {
-                var query = "SELECT * FROM Products WHERE ProductId = @ProductId";
+                //edit Product_Id
+                var query = "SELECT * FROM Production.Products WHERE Product_Id = @ProductId";
                 return await db.QueryFirstOrDefaultAsync<Product>(query, new { ProductId = productId });
             }
         }
@@ -65,7 +66,7 @@ namespace M_Nek_Mohammade_HW_W18_01.DataAccessLayer
         {
             using (var db = Connection)
             {
-                var query = "UPDATE Products SET Name = @Name, ModelYear = @ModelYear, Price = @Price WHERE ProductId = @ProductId";
+                var query = "UPDATE Products SET Name = @Name, Model_Year = @Model_Year, Price = @Price WHERE ProductId = @ProductId";
                 await db.ExecuteAsync(query, product);
             }
         }
